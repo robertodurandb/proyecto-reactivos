@@ -1,7 +1,8 @@
 const express = require('express')
 const mysql = require('mysql2')
 const myconn = require('express-myconnection')
-const routes = require('./routes')
+const { AreaController } = require('./controllers/areacontroller')
+const { UserController } = require('./controllers/usercontroller')
 
 const app = express()
 
@@ -16,12 +17,18 @@ const dbOptions = {
 }
 //middlewares
 app.use(myconn(mysql, dbOptions, 'single'))
+app.use(express.json())
 
-//rutas
-app.get('/',(req, res)=>{
-    res.send('hello world')
-})
-app.use('/api', routes)
+//rutas********************************
+
+app.get('/areas', AreaController.list);
+app.get('/area/:id', AreaController.retrieve);
+app.post('/area', AreaController.create);
+app.delete('/area/:id', AreaController.delete);
+app.put('/area/:id', AreaController.update);
+
+app.get('/usuarios', UserController.list);
+app.post('/usuario', UserController.create);
 
 
 app.listen(app.get('port'), ()=>{
