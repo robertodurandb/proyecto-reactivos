@@ -8,6 +8,7 @@ class AreaController {
                 if(err) return res.send(err)
     
                 res.json(rows)
+                
             })
         })
     }
