@@ -23,12 +23,10 @@ class UserController {
                     if(results.length>0){
                         bcrypt.compare(req.body.password, results[0].password, function(err, result){
                         if(result) {
-                            console.log(results.length);
                             let payload = {
                                 id: results[0].iduser,
                                 username: results[0].dniuser
                             }
-                            console.log(payload)
                             const token = jwt.sign(payload, process.env.SECRET, {expiresIn: '1800s'});
                             return res.send({ token : token });
                             
