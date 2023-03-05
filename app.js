@@ -2,6 +2,7 @@ const express = require('express')
 const mysql = require('mysql2')
 const myconn = require('express-myconnection')
 const Dotenv = require('dotenv')
+const cors = require('cors')
 
 const { AreaController } = require('./controllers/areacontroller')
 const { UserController } = require('./controllers/usercontroller')
@@ -32,6 +33,7 @@ const dbOptions = {
 //middlewares
 app.use(myconn(mysql, dbOptions, 'single'))
 app.use(express.json())
+app.use(cors())
 
 //rutas********************************
 
@@ -82,6 +84,7 @@ app.delete('/examen_perfil/:id/:id', jwtMiddleware, PerfilExamenController.delet
 app.put('/examen_perfil/:id/:id',jwtMiddleware, PerfilExamenController.update);
 
 app.get('/estados', EstadoController.list);
+app.get('/estado/:id', EstadoController.retrieve);
 
 app.get('/registros', RegistroController.list);
 app.get('/registro/:id/',RegistroController.retrieve);

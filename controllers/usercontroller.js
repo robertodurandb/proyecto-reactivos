@@ -27,17 +27,16 @@ class UserController {
                                 id: results[0].iduser,
                                 username: results[0].dniuser
                             }
-                            const token = jwt.sign(payload, process.env.SECRET, {expiresIn: '1800s'});
-                            return res.send({ token : token });
+                            const token = jwt.sign(payload, process.env.SECRET, {expiresIn: '3600s'});
+                            return res.status(200).send({ token : token });
                             
                         }else{
-                            return res.status(400).send({ message: "Invalid Password"});
+                            return res.status(401).send({ message: "Invalid Password"});
                         }
 
                         });
                     }else{
-                        console.log("prueba if usuarios fallida");
-                        return res.status(400).send({ message: "Invalid User"});
+                        return res.status(401).send({ message: "Invalid User"});
                     }
                 } 
                 

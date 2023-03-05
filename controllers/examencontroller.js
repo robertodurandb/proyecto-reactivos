@@ -4,7 +4,7 @@ class ExamenController {
         req.getConnection((err, conn)=>{
             if(err) return res.send(err)
     
-            conn.query('SELECT * FROM examen', (err, rows)=>{
+            conn.query('SELECT * FROM examen as e INNER JOIN area as a ON e.area_idarea = a.idarea INNER JOIN estado as s ON e.estado = s.idestado INNER JOIN tipomuestra as t ON t.idtipomuestra = e.tipomuestra_idtipomuestra', (err, rows)=>{
                 if(err) return res.send(err)
     
                 res.json(rows)
@@ -16,7 +16,7 @@ class ExamenController {
         req.getConnection((err, conn)=>{
             if(err) return res.send(err)
     
-            conn.query('SELECT * FROM examen WHERE idexamen = ?', [req.params.id], (err, rows)=>{
+            conn.query('SELECT * FROM examen as e INNER JOIN area as a ON e.area_idarea = a.idarea INNER JOIN estado as s ON e.estado = s.idestado INNER JOIN tipomuestra as t ON t.idtipomuestra = e.tipomuestra_idtipomuestra WHERE idexamen = ?', [req.params.id], (err, rows)=>{
                 if(err) return res.send(err)
     
                 res.json(rows)
