@@ -28,9 +28,9 @@ class ExamenController {
             if(err) return res.send(err)
     
             conn.query('INSERT INTO examen set ?', [req.body], (err, rows)=>{
-                if(err) return res.send(err)
+                if(err) return res.status(401).send(err)
     
-                res.send('examen added!')
+                res.status(200).send('examen added!')
             })
         })
     }
