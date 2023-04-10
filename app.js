@@ -14,6 +14,7 @@ const { PerfilExamenController } = require('./controllers/perfil_examencontrolle
 const { EstadoController } = require('./controllers/estadocontroller')
 const { RegistroController } = require('./controllers/registrocontroller')
 const { RegistroDetalleController } = require('./controllers/registrodetallecontroller')
+const { TipomuestraController } = require('./controllers/tipocontroller')
 
 const jwtMiddleware = require('./middlewares/jwt')
 
@@ -57,6 +58,12 @@ app.post('/area', jwtMiddleware, AreaController.create);
 app.delete('/area/:id', jwtMiddleware, AreaController.delete);
 app.put('/area/:id', jwtMiddleware, AreaController.update);
 app.get('/area/:id/examenes', AreaController.retrieve_by_area);
+
+app.get('/tipomuestras', TipomuestraController.list);
+app.get('/tipomuestra/:id', TipomuestraController.retrieve);
+app.post('/tipomuestra', jwtMiddleware, TipomuestraController.create);
+app.delete('/tipomuestra/:id', jwtMiddleware, TipomuestraController.delete);
+app.put('/tipomuestra/:id', jwtMiddleware, TipomuestraController.update);
 
 app.get('/proveedores', ProveedorController.list);
 app.get('/proveedor/:id', ProveedorController.retrieve);
